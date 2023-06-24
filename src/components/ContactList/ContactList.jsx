@@ -1,14 +1,23 @@
 import React from 'react';
-import Phonebook from 'components/Phonebook';
+import PropTypes from 'prop-types';
 
-const ContactList = ({ name, id }) => {
+const ContactList = ({ contacts }) => {
   return (
-    <ul>
+    <div>
       <h2>Contacts</h2>
-      <li>{name}</li>
-      <li>{id}</li>
-    </ul>
+      <ul>
+        {contacts.map(person => (
+          <li key={person.id}>
+            <span>{person.id}</span>
+            <span>{person.name}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
+ContactList.propTypes = {
+  contacts: PropTypes.array.isRequired,
+};
 export default ContactList;
