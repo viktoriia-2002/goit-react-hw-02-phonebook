@@ -8,7 +8,6 @@ const ContactList = ({ contacts }) => {
       <ul>
         {contacts.map(person => (
           <li key={person.id}>
-            <span>{person.id}</span>
             <span>{person.name}</span>
           </li>
         ))}
