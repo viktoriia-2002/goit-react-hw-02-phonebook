@@ -2,6 +2,7 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
+import ContactForm from './'
 
 class Phonebook extends React.Component {
   state = {
@@ -12,8 +13,10 @@ class Phonebook extends React.Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
   };
 
   handleNameChange = event => {
@@ -21,7 +24,19 @@ class Phonebook extends React.Component {
   };
 
   handleNewContact = () => {
-    const { name, number } = this.state;
+    const { name, number, contacts } = this.state;
+
+    const duplicateContact = contacts.some(
+      contact =>
+        contact.name.toLowerCase() === name.toLowerCase() &&
+        contact.number === number
+    );
+
+    if (duplicateContact) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
     const id = nanoid();
 
     const newContact = {
@@ -50,44 +65,58 @@ class Phonebook extends React.Component {
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
 
-
     return (
-      <form>
-        <label htmlFor="name">
-          Name
-          <input
-            type="text"
-            id="name"
-            className="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-            value={name}
-            onChange={this.handleNameChange}
-          />
-        </label>
-        <br />
-        <label htmlFor="tel">
-          {' '}
-          Number
-          <input
-            type="tel"
-            id="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-            value={number}
-            onChange={this.handleTelChange}
-          />
-        </label>
-        <button type="submit" onClick={this.handleNewContact}>
-          Add contact
-        </button>
+      // <form autoComplete="off">
+      //   <label htmlFor="name">
+      //     Name
+      //     <input
+      //       type="text"
+      //       id="name"
+      //       className="name"
+      //       pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+      //       title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+      //       required
+      //       value={name}
+      //       onChange={this.handleNameChange}
+      //     />
+      //   </label>
+      //   <br />
+      //   <label htmlFor="tel">
+      //     {' '}
+      //     Number
+      //     <input
+      //       type="tel"
+      //       id="tel"
+      //       name="number"
+      //       pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
+      //       title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+      //       required
+      //       value={number}
+      //       onChange={this.handleTelChange}
+      //     />
+      //   </label>
+      //   <button type="submit" onClick={this.handleNewContact}>
+      //     Add contact
+      //   </button>
+      //   <h3>FInd contacts by name</h3>
+      //   <Filter
+      //     onChange={e => this.setState({ filter: e.target.value })}
+      //     value={this.state.filter}
+      //   />
+      //   <ContactList contacts={filteredContacts} />
+      // </form>
+      <div>
+      <ContactForm/>
         <h3>FInd contacts by name</h3>
-        <Filter onChange={e => this.setState({filter: e.target.value})} value={this.state.filter} />
-        <ContactList contacts={filteredContacts} />
-      </form>
+
+      <Filter
+        onChange={e => this.setState({ filter: e.target.value })}
+        value={this.state.filter}
+      />
+      <ContactList contacts={filteredContacts} />
+      </div>
+      
+
     );
   }
 }
