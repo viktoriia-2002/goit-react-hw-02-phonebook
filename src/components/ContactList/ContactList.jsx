@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { List, Button, SpanList, LiList } from './ContactList.styled';
 
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts,handleDelete }) => {
   return (
     <div>
       <h2>Contacts</h2>
-      <ul>
+      <List>
         {contacts.map(person => (
-          <li key={person.id}>
-            <span>{person.name}:</span>
-            <span>{person.number}</span>
+          <LiList key={person.id}>
+            <SpanList>{person.name}:</SpanList>
+            <SpanList>{person.number}</SpanList>
+            <Button type="button" onClick={() => handleDelete(person.id)}>
+        Delete
+      </Button>
 
-          </li>
+          </LiList>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };

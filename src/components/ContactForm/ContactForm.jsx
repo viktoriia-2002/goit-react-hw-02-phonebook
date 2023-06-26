@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Form, Label, Input, Button } from './ContactForm.styled';
 const ContactForm = ({
   handleNameChange,
   handleNewContact,
@@ -8,10 +8,10 @@ const ContactForm = ({
 }) => {
   const { number, name } = state;
   return (
-    <form autoComplete="off">
-      <label htmlFor="name">
+    <Form autoComplete="off">
+      <Label htmlFor="name">
         Name
-        <input
+        <Input
           type="text"
           id="name"
           className="name"
@@ -21,12 +21,11 @@ const ContactForm = ({
           value={name}
           onChange={handleNameChange}
         />
-      </label>
-      <br />
-      <label htmlFor="tel">
+      </Label>
+      <Label htmlFor="tel">
         {' '}
         Number
-        <input
+        <Input
           type="tel"
           id="tel"
           name="number"
@@ -36,12 +35,12 @@ const ContactForm = ({
           value={number}
           onChange={handleTelChange}
         />
-      </label>
-      <button type="submit" onClick={handleNewContact}>
+      </Label>
+      <Button type="submit" onClick={handleNewContact}>
         Add contact
-      </button>
-      <h3>FInd contacts by name</h3>
-    </form>
+      </Button>
+      <h3>Find contacts by name</h3>
+    </Form>
   );
 };
 

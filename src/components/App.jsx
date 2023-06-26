@@ -62,6 +62,12 @@ class Phonebook extends React.Component {
     this.setState({ filter: event.target.value });
   };
 
+  handleDelete = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   render() {
     const { name, contacts, number, filter } = this.state;
     const filteredContacts = contacts.filter(contact =>
@@ -70,19 +76,23 @@ class Phonebook extends React.Component {
 
     return (
       <div>
+        <h1>Phonebook</h1>
         <ContactForm
           handleNameChange={this.handleNameChange}
           state={this.state}
           handleNewContact={this.handleNewContact}
           handleTelChange={this.handleTelChange}
         />
-        <h3>FInd contacts by name</h3>
+        <h2>Contacts</h2>
 
         <Filter
           onChange={e => this.setState({ filter: e.target.value })}
           value={this.state.filter}
         />
-        <ContactList contacts={filteredContacts} />
+        <ContactList
+          contacts={filteredContacts}
+          handleDelete={this.handleDelete}
+        />
       </div>
     );
   }
