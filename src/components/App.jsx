@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
 import ContactForm from './ContactForm';
-// import ContactListItem from './ContactListItem';
+import { Container } from './App.styled';
 
 class App extends React.Component {
   state = {
@@ -74,7 +74,7 @@ class App extends React.Component {
     );
 
     return (
-      <div>
+      <Container>
         <h1>Phonebook</h1>
         <ContactForm
           handleNameChange={this.handleNameChange}
@@ -92,7 +92,7 @@ class App extends React.Component {
           contacts={filteredContacts}
           handleDelete={this.handleDelete}
         />
-      </div>
+      </Container>
     );
   }
 }
