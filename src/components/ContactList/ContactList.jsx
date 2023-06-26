@@ -14,7 +14,6 @@ const ContactList = ({ contacts,handleDelete }) => {
             <Button type="button" onClick={() => handleDelete(person.id)}>
         Delete
       </Button>
-
           </LiList>
         ))}
       </List>

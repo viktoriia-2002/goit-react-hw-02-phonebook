@@ -3,8 +3,9 @@ import { nanoid } from 'nanoid';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
 import ContactForm from './ContactForm';
+// import ContactListItem from './ContactListItem';
 
-class Phonebook extends React.Component {
+class App extends React.Component {
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -27,14 +28,12 @@ class Phonebook extends React.Component {
 
   handleNewContact = () => {
     const { name, number, contacts } = this.state;
-
-    const duplicateContact = contacts.some(
-      contact =>
-        contact.name.toLowerCase() === name.toLowerCase() &&
-        contact.number === number
+    
+    const duplicateName = contacts.some(
+      (contact) => contact.name.toLowerCase() === name.toLowerCase()
     );
 
-    if (duplicateContact) {
+    if (duplicateName) {
       alert(`${name} is already in contacts.`);
       return;
     }
@@ -69,18 +68,11 @@ class Phonebook extends React.Component {
   };
 
   render() {
-    const {  contacts,  filter } = this.state;
+    const { contacts, filter } = this.state;
     const filteredContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
 
-
-    // render() {
-    //   const { name, contacts, number, filter } = this.state;
-    //   const filteredContacts = contacts.filter(contact =>
-    //     contact.name.toLowerCase().includes(filter.toLowerCase())
-    //   );
-  
     return (
       <div>
         <h1>Phonebook</h1>
@@ -105,4 +97,4 @@ class Phonebook extends React.Component {
   }
 }
 
-export default Phonebook;
+export default App;
