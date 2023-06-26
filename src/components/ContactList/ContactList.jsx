@@ -1,20 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Button, SpanList, LiList } from './ContactList.styled';
+import { List } from './ContactList.styled';
+import ContactListItem from '../ContactListItem/ContactListItem';
 
-const ContactList = ({ contacts,handleDelete }) => {
+const ContactList = ({ contacts, handleDelete }) => {
   return (
     <div>
       <h2>Contacts</h2>
       <List>
         {contacts.map(person => (
-          <LiList key={person.id}>
-            <SpanList>{person.name}:</SpanList>
-            <SpanList>{person.number}</SpanList>
-            <Button type="button" onClick={() => handleDelete(person.id)}>
-        Delete
-      </Button>
-          </LiList>
+          <ContactListItem key={person.id} person={person} handleDelete={handleDelete} />
         ))}
       </List>
     </div>
@@ -23,5 +18,7 @@ const ContactList = ({ contacts,handleDelete }) => {
 
 ContactList.propTypes = {
   contacts: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
+
 export default ContactList;
