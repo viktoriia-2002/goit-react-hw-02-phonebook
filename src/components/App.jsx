@@ -69,11 +69,18 @@ class Phonebook extends React.Component {
   };
 
   render() {
-    const { name, contacts, number, filter } = this.state;
+    const {  contacts,  filter } = this.state;
     const filteredContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
 
+
+    // render() {
+    //   const { name, contacts, number, filter } = this.state;
+    //   const filteredContacts = contacts.filter(contact =>
+    //     contact.name.toLowerCase().includes(filter.toLowerCase())
+    //   );
+  
     return (
       <div>
         <h1>Phonebook</h1>
