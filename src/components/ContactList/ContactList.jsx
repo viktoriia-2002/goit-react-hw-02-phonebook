@@ -5,14 +5,15 @@ import ContactListItem from '../ContactListItem/ContactListItem';
 
 const ContactList = ({ contacts, handleDelete }) => {
   return (
-    <div>
-      <h2>Contacts</h2>
-      <List>
-        {contacts.map(person => (
-          <ContactListItem key={person.id} person={person} handleDelete={handleDelete} />
-        ))}
-      </List>
-    </div>
+    <List>
+      {contacts.map(person => (
+        <ContactListItem
+          key={person.id}
+          person={person}
+          handleDelete={handleDelete}
+        />
+      ))}
+    </List>
   );
 };
 
